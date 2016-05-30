@@ -1,1 +1,20 @@
-<h2> Talks#Index </h2> 
+<h2> Talks#Index </h2>
+
+<% @talks.each do |t| %>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card purple darken-3">
+        <div class="card-content white-text">
+          <span class="card-title"> <%= link_to t.title, talk_path(t.id) %> </span>
+          <ul>
+            <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
+            <li> Address: <%= t.location %> </li>
+            <li> Description: <%= t.description %> </li>
+            <li> Available Spots: <%= t.spots %> </li>
+            <li> <%= time_ago_in_words(t.created_at) %> ago </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
