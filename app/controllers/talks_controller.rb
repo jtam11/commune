@@ -1,4 +1,5 @@
 class TalksController < ApplicationController
+  before_action :set_talk, :except => [:index, :new, :create]
 
   def index
   end
@@ -7,9 +8,11 @@ class TalksController < ApplicationController
   end
 
   def new
+    @talk = Talk.new
   end
 
   def create
+    @talk = Talk.new(talk_params)
   end
 
   def edit
@@ -19,6 +22,16 @@ class TalksController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+
+  def talk_params
+    params.require(:talk).permit(:title, :location, :date, :time, :spots, :description, :picture, :user_id)
+  end
+
+  def set_talk
+    @talk = Talk.find(params[:talk_id])
   end
 
 end
