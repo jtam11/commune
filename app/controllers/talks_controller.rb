@@ -14,6 +14,7 @@ class TalksController < ApplicationController
 
   def create
     @talk = Talk.new(talk_params)
+    @talk.user_id = current_user.id
     if @talk.save
       redirect_to talk_path(@talk)
     else
