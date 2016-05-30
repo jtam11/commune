@@ -25,7 +25,14 @@ class TalksController < ApplicationController
   def edit
   end
 
-  def udpate
+  def update
+    if @talk.user_id == current_user.id
+      if @talk.update(talk_params)
+        redirect_to talk_path(@talk)
+      else
+        render :edit
+      end
+    end
   end
 
   def destroy
