@@ -13,8 +13,9 @@
           <li> <%= time_ago_in_words(@talk.created_at) %> ago </li>
         </ul>
       </div>
+      <%= link_to "Edit", edit_talk_path(@talk), class:"btn waves-effect cyan darken-1" %>
     </div>
   </div>
 </div>
 
-<%= link_to "Back", talks_path, class:"btn waves-effect waves-light" %>
+<%= link_to "Back", talks_path, class:"btn waves-effect blue-grey lighten-1" %>
