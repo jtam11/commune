@@ -36,6 +36,15 @@ class TalksController < ApplicationController
   end
 
   def destroy
+    if @talk.user_id == current_user.id
+      if @talk.destroy
+        redirect_to talks_path
+      else
+        redirect_to talk_path(@talk)
+      end
+    else
+      redirect_to root_path
+    end
   end
 
 private
