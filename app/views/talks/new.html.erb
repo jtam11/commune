@@ -1,0 +1,28 @@
+<h2>talk#new</h2>
+<%= form_for @talk  do |f| %>
+  <div class="form-field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+    <%= f.label :time %>
+    <%= f.time_field :time %>
+  </div>
+  <div class="form-field">
+    <%= f.label "Address" %>
+    <%= f.text_field :location %>
+  </div>
+  <div class="form-field">
+    <%= f.label 'Available Spots' %>
+    <%= f.number_field :spots, min: 1, max: 25 %>
+  </div>
+  <div class="form-field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="form-field">
+    <%= f.submit "Submit", class:"btn waves-effect waves-light"%>
+  </div>
+<% end %>
