@@ -4,11 +4,19 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
-  <div class="form-group">
-    <%= f.label :date %>
-    <%= f.date_field :date %>
-    <%= f.label :time %>
-    <%= f.time_field :time %>
+  <div class="row">
+    <div class="form-field col sm4" id="when">
+      <%= f.label :date %>
+      <%= f.date_field :date%>
+    </div>
+    <div class="form-field col sm4" id="when">
+      <%= f.label "Start" %>
+      <%= f.time_field :start_time %>
+    </div>
+    <div class="form-field col sm4" id="when">
+      <%= f.label "End" %>
+      <%= f.time_field :end_time %>
+    </div>
   </div>
   <div class="form-field">
     <%= f.label "Address" %>
@@ -20,7 +28,7 @@
   </div>
   <div class="form-field">
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_area :description, class:"materialize-textarea" %>
   </div>
   <div class="form-field">
     <%= f.submit "Submit", class:"btn waves-effect waves-light"%>
