@@ -13,6 +13,11 @@ class TalksController < ApplicationController
 
   def create
     @talk = Talk.new(talk_params)
+    if @talk.save
+      redirect_to talk_path(@talk)
+    else
+      render :new
+    end
   end
 
   def edit
