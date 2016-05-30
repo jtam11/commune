@@ -2,6 +2,7 @@ class TalksController < ApplicationController
   before_action :set_talk, :except => [:index, :new, :create]
 
   def index
+    @talks = Talk.all
   end
 
   def show
@@ -32,7 +33,7 @@ class TalksController < ApplicationController
 private
 
   def talk_params
-    params.require(:talk).permit(:title, :location, :date, :time, :spots, :description, :picture, :user_id)
+    params.require(:talk).permit(:title, :location, :date, :start_time, :end_time, :spots, :description, :picture, :user_id)
   end
 
   def set_talk
