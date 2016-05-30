@@ -4,10 +4,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commune</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Commune</a>
+      <ul class="right hide-on-med-and-down">
+        <% if current_user %>
+        <li><%= link_to "Talks", talks_path %></li>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-button" data-activates="dropdown1"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
+        <% else %>
+        <li> <%= link_to "Sign up", new_user_registration_path %></li>
+        <li> <%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+    <ul id="dropdown1" class="dropdown-content">
+      <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
+      <li class="divider"></li>
+      <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
+    </ul>
+  </nav>
 <%= yield %>
 
 </body>
