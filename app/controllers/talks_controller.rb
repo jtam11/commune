@@ -37,7 +37,7 @@ private
   end
 
   def set_talk
-    @talk = Talk.find(params[:talk_id])
+    @talk = Talk.find(params[:id])
   end
 
 end
