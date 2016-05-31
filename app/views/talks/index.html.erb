@@ -8,7 +8,7 @@
       <div class="card purple darken-3">
         <div class="card-content white-text">
           <span class="card-title"> <%= link_to t.title, talk_path(t.id) %> </span>
-          <p> hosted by: <%= link_to t.user.username, user_path(t.user.id)  %> </p>
+          <p> hosted by: <%= link_to t.host.username, user_path(t.host.id)  %> </p>
           <ul>
             <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
             <li> Address: <%= t.location %> </li>
