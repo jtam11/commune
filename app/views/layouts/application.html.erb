@@ -9,6 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- start of navbar -->
   <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">Commune</a>
@@ -23,12 +24,29 @@
         <% end %>
       </ul>
     </div>
+    <!-- dropdown content -->
     <ul id="dropdown1" class="dropdown-content">
       <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
       <li class="divider"></li>
       <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
     </ul>
   </nav>
+
+  <!-- start flash messages -->
+  <div>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-dismissible alert-<%= key %>">
+
+        <script type="text/javascript">
+          Materialize.toast('<%= value %>', 4000)
+        </script>
+​
+      </div>
+    <% end %>
+  </div>
+
+
+
 <%= yield %>
 
 </body>
