@@ -16,8 +16,10 @@ class TalksController < ApplicationController
     @talk = Talk.new(talk_params)
     @talk.user_id = current_user.id
     if @talk.save
+      flash[:success] = "Successfully created talk"
       redirect_to talk_path(@talk)
     else
+      flash[:error] = @talk.errrors.full_message.to_sentence
       render :new
     end
   end
@@ -28,8 +30,10 @@ class TalksController < ApplicationController
   def update
     if @talk.user_id == current_user.id
       if @talk.update(talk_params)
+        flash[:success] = "Successfully updated talk"
         redirect_to talk_path(@talk)
       else
+        flash[:error] = @talk.errrors.full_message.to_sentence
         render :edit
       end
     end
@@ -38,9 +42,10 @@ class TalksController < ApplicationController
   def destroy
     if @talk.user_id == current_user.id
       if @talk.destroy
+        flash[:success] = "Successfully deleted talk"
         redirect_to talks_path
       else
-        redirect_to talk_path(@talk)
+        flash[:error] = @talk.errrors.full_message.to_sentence
       end
     else
       redirect_to root_path
