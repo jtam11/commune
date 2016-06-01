@@ -13,7 +13,7 @@
             <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
             <li> Address: <%= t.location %> </li>
             <li> Description: <%= t.description %> </li>
-            <li> Available Spots: <%= t.spots %> </li>
+            <li> Available Spots: <%= t.spots - t.attendees.size %>/<%= t.spots %>  </li>
             <li> <%= time_ago_in_words(t.created_at) %> ago </li>
           </ul>
         </div>

@@ -1,5 +1,16 @@
 <h2>talk#show</h2>
 
+<% if current_user.attending?(@talk) %>
+  <%= form_for(current_user.invites.find_by(attended_talk_id: @talk.id), method: :delete ) do |f| %>
+    <%= f.submit "Cancel", class: "btn waves-effect blue-grey lighten-1" %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.invites.build(attended_talk_id: @talk.id)) do |f| %>
+    <div><%= f.hidden_field :attended_talk_id %></div>
+    <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col s12 m6">
     <div class="card purple darken-3">
@@ -16,7 +27,16 @@
           <li> Date: <strong><%= @talk.date.strftime("%b %d, %Y") %></strong> Time: <%= @talk.start_time.strftime('%I:%M %p') %> - <%= @talk.end_time.strftime('%I:%M %p') %> </li>
           <li> Address: <%= @talk.location %> </li>
           <li> Description: <%= @talk.description %> </li>
-          <li> Available Spots: <%= @talk.spots %> </li>
+          <li> Available Spots: <%= @talk.spots - @talk.attendees.size %> </li>
+          <br>
+          <% if @talk.attendees.size > 0 %>
+            <b>Attendee(s):</b>
+            <ol>
+            <% @talk.attendees.each do |a| %>
+               <li><%= link_to a.username, user_path(a) %></li>
+            <% end %>
+          <% end %>
+          </ol>
           <li> <%= time_ago_in_words(@talk.created_at) %> ago </li>
         </ul>
       </div>
