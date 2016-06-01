@@ -22,8 +22,10 @@ defaults: &defaults
   # of putting this option here, as it will not have any effect.
   # But it also will not break anything.
 
+
+  crop: true, "300x300 upscale"
   # for preview step use:
-  # preview_step: false # true or false
+  preview_step: true # true or false
 
   # for clearable option (allows user to remove uploaded file from widget) use:
   # clearable: false # true or false
