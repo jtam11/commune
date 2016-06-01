@@ -9,12 +9,11 @@ class TalksController < ApplicationController
   end
 
   def new
-    @talk = Talk.new
+    @talk = current_user.talks.build
   end
 
   def create
-    @talk = Talk.new(talk_params)
-    @talk.user_id = current_user.id
+    @talk = current_user.talks.build(talk_params)
     if @talk.save
       flash[:success] = "Successfully created talk"
       redirect_to talk_path(@talk)
@@ -28,7 +27,7 @@ class TalksController < ApplicationController
   end
 
   def update
-    if @talk.user_id == current_user.id
+    if @talk.host_id == current_user.id
       if @talk.update(talk_params)
         flash[:success] = "Successfully updated talk"
         redirect_to talk_path(@talk)
@@ -40,7 +39,7 @@ class TalksController < ApplicationController
   end
 
   def destroy
-    if @talk.user_id == current_user.id
+    if @talk.host_id == current_user.id
       if @talk.destroy
         flash[:success] = "Successfully deleted talk"
         redirect_to talks_path
@@ -55,7 +54,7 @@ class TalksController < ApplicationController
 private
 
   def talk_params
-    params.require(:talk).permit(:title, :location, :date, :start_time, :end_time, :spots, :description, :picture, :user_id)
+    params.require(:talk).permit(:title, :location, :date, :start_time, :end_time, :spots, :description, :picture, :host_id)
   end
 
   def set_talk

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/users/:id', to: "users#show", as: "user"
   resources :talks
 
+  resources :invites, only: [:create, :destroy]
+
 
   get "*path" => redirect("/")
 end

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530072724) do
+ActiveRecord::Schema.define(version: 20160601005820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invites", force: :cascade do |t|
+    t.integer  "attendee_id"
+    t.integer  "attended_talk_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "invites", ["attended_talk_id"], name: "index_invites_on_attended_talk_id", using: :btree
+  add_index "invites", ["attendee_id", "attended_talk_id"], name: "index_invites_on_attendee_id_and_attended_talk_id", unique: true, using: :btree
+  add_index "invites", ["attendee_id"], name: "index_invites_on_attendee_id", using: :btree
 
   create_table "talks", force: :cascade do |t|
     t.string   "title"
@@ -27,10 +38,10 @@ ActiveRecord::Schema.define(version: 20160530072724) do
     t.string   "description"
     t.string   "picture"
     t.time     "end_time"
-    t.integer  "user_id"
+    t.integer  "host_id"
   end
 
-  add_index "talks", ["user_id"], name: "index_talks_on_user_id", using: :btree
+  add_index "talks", ["host_id"], name: "index_talks_on_host_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -60,5 +71,5 @@ ActiveRecord::Schema.define(version: 20160530072724) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "talks", "users"
+  add_foreign_key "talks", "users", column: "host_id"
 end
