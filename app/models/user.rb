@@ -22,4 +22,21 @@ class User < ActiveRecord::Base
   def cancel!(talk)
     self.invites.find_by(attended_talk_id: talk.id).destroy
   end
+
+  def upcoming_hosted
+    self.talks.upcoming
+  end
+
+  def previous_hosted
+    self.talks.past
+  end
+
+  def upcoming_attended
+    self.attended_talks.upcoming
+  end
+
+  def previous_attended
+    self.attended_talks.past
+  end
+  
 end
