@@ -2,7 +2,7 @@ class TalksController < ApplicationController
   before_action :set_talk, :except => [:index, :new, :create]
 
   def index
-    @talks = Talk.all.order("date asc")
+    @talks = Talk.all.order("date asc", "start_time asc")
   end
 
   def show
