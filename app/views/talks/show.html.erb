@@ -1,13 +1,14 @@
 <h2>talk#show</h2>
-
-<% if current_user.attending?(@talk) %>
-  <%= form_for(current_user.invites.find_by(attended_talk_id: @talk.id), method: :delete ) do |f| %>
-    <%= f.submit "Cancel", class: "btn waves-effect blue-grey lighten-1" %>
-  <% end %>
-<% else %>
-  <%= form_for(current_user.invites.build(attended_talk_id: @talk.id)) do |f| %>
-    <div><%= f.hidden_field :attended_talk_id %></div>
-    <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+<% if @talk.host.id != current_user.id %>
+  <% if current_user.attending?(@talk) %>
+    <%= form_for(current_user.invites.find_by(attended_talk_id: @talk.id), method: :delete ) do |f| %>
+      <%= f.submit "Cancel", class: "btn waves-effect blue-grey lighten-1" %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.invites.build(attended_talk_id: @talk.id)) do |f| %>
+      <div><%= f.hidden_field :attended_talk_id %></div>
+      <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+    <% end %>
   <% end %>
 <% end %>
 
