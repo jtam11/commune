@@ -4,12 +4,14 @@
 
 <% if @upcoming_hosted.any? || @upcoming_attended.any? %>
   <h4>Upcoming:</h4>
-  <%= render 'hosted_talks', object: @upcoming_hosted %>
-  <%= render 'attended_talks', object: @upcoming_attended %>
+  <%= render 'upcoming_talks', object: @upcoming_hosted %>
+  <%= render 'upcoming_talks', object: @upcoming_attended %>
 <% end %>
 
 <% if @previous_hosted.any? || @previous_attended.any? %>
   <h4>History:</h4>
-  <%= render 'hosted_talks', object: @previous_hosted %>
-  <%= render 'attended_talks', object: @previous_attended %>
+
+  <%= render 'previous_talks', object: @previous_hosted %>
+  <%= render 'previous_talks', object: @previous_attended %>
+
 <% end %>

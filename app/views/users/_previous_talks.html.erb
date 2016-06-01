@@ -1,16 +1,32 @@
 <% object.each do |t| %>
-  <div class="row">
+  <div class="row previous">
     <div class="col s12 m6">
+
+      <!-- different color if user is host -->
+      <% if t.host_id == current_user.id %>
       <div class="card light-green darken-1">
+      <% else %>
+      <div class="card purple darken-3">
+      <% end %>
+
+        <!-- display edit/delete buttons if user is host -->
         <% if t.host_id == current_user.id %>
           <div class="inline-block">
             <%= link_to '<i class="material-icons small right">delete</i>'.html_safe, talk_path(t), data: { confirm: "Are you sure you want to delete this talk?" }, method: :delete%>
             <%= link_to '<i class="material-icons small right">mode edit</i>'.html_safe, edit_talk_path(t)%>
           </div>
         <% end %>
+
         <div class="card-content white-text">
           <span class="card-title"> <%= link_to t.title, talk_path(t) %> </span>
+
+          <!-- says "hosting" if user is host -->
+          <% if t.host_id == current_user.id %>
           <p> Hosting </p>
+          <% else %>
+          <p> hosted by: <%= link_to t.host.username, user_path(t.host.id)  %> </p>
+          <% end %>
+
           <ul>
             <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
             <li> Address: <%= t.location %> </li>
