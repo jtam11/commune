@@ -8,4 +8,18 @@ class User < ActiveRecord::Base
 
   has_many :invites, :foreign_key => :attendee_id
   has_many :attended_talks, :through => :invites
+
+
+
+  def attend!(talk)
+    self.invites.create!(attended_talk_id: talk.id)
+  end
+
+  def attending?(talk)
+    talk.attendees.include?(self)
+  end
+
+  def cancel!(talk)
+    self.invites.find_by(attended_talk_id: talk.id).destroy
+  end
 end
