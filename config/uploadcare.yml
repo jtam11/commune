@@ -23,7 +23,7 @@ defaults: &defaults
   # But it also will not break anything.
 
 
-  crop: true, "300x300 upscale"
+  crop: true, 300x300, upscale
   # for preview step use:
   preview_step: true # true or false
 
