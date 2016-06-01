@@ -1,5 +1,5 @@
 <h2>Users#show</h2>
-
+<%= image_tag @user.picture %>
 <h3> <strong> <%= @user.username %> </strong> </h3>
 
 <% if @upcoming_hosted.any? || @upcoming_attended.any? %>
