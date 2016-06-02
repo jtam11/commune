@@ -23,7 +23,7 @@
       <% end %>
       <div class="card-content white-text">
         <span class="card-title"> <%= @talk.title %> </span>
-        <p> hosted by: <%= link_to @talk.host.username, user_path(@talk.host.id)  %> </p>
+        <p> hosted by: <%= image_tag @talk.host.picture, class: "circle" %><%= link_to @talk.host.username, user_path(@talk.host.id)  %> </p>
         <ul>
           <li> Date: <strong><%= @talk.date.strftime("%b %d, %Y") %></strong> Time: <%= @talk.start_time.strftime('%I:%M %p') %> - <%= @talk.end_time.strftime('%I:%M %p') %> </li>
           <li> Address: <%= @talk.location %> </li>
@@ -34,7 +34,7 @@
             <b>Attendee(s):</b>
             <ol>
             <% @talk.attendees.each do |a| %>
-               <li><%= link_to a.username, user_path(a) %></li>
+               <li><%= image_tag a.picture, class: "circle" %><%= link_to a.username, user_path(a) %></li>
             <% end %>
           <% end %>
           </ol>
