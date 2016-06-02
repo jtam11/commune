@@ -64,11 +64,9 @@
   <!-- dropdown search bar -->
   <div id="search" class="row white-text grey darken-3" >
     <div class="container">
-        <form>
-          <span class="input-field">
-            <input type="text" placeholder="Search ..." name="q"></input>
-          </span>
-        </form>
+      <%= form_tag(talks_path, :method => "get", id: "search-form") do %>
+      <%= text_field :search, params[:search], placeholder: "Search..." %><%= submit_tag "Submit", :style => "display: none;"%>
+      <% end %>
     </div>
   </div>
 
@@ -83,7 +81,7 @@
 ​
       </div>
     <% end %>
-  </span>
+  </div>
 
 
 

@@ -25,4 +25,8 @@ class Talk < ActiveRecord::Base
     Tag.find_by_name!(name).talks
   end
 
+  def self.search(search)
+    where("title LIKE ?", '%' + search[0] + '%')
+  end
+
 end
