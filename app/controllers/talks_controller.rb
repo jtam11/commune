@@ -2,7 +2,9 @@ class TalksController < ApplicationController
   before_action :set_talk, :except => [:index, :new, :create]
 
   def index
-    if params[:tag]
+    if params[:search]
+      @talks = Talk.upcoming.search(params[:search]).order("date asc", "start_time asc")
+    elsif params[:tag]
       @talks = Talk.tagged_with(params[:tag])
     else
       @talks = Talk.upcoming.order("date asc", "start_time asc")
