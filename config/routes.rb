@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   get '/users/:id', to: "users#show", as: "user"
+
   resources :talks
+  get 'tags/:tag', to: "talks#index", as: "tag"
 
   resources :invites, only: [:create, :destroy]
 
