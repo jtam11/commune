@@ -29,6 +29,9 @@
           <li> Address: <%= @talk.location %> </li>
           <li> Description: <%= @talk.description %> </li>
           <li> Available Spots: <%= @talk.spots - @talk.attendees.size %> </li>
+          <% if @talk.all_tags.size > 0 %>
+            <li> Tags: <%= raw tag_links(@talk.all_tags) %> </li>
+          <% end %>
           <br>
           <% if @talk.attendees.size > 0 %>
             <b>Attendee(s):</b>

@@ -2,7 +2,11 @@ class TalksController < ApplicationController
   before_action :set_talk, :except => [:index, :new, :create]
 
   def index
-    @talks = Talk.upcoming.order("date asc", "start_time asc")
+    if params[:tag]
+      @talks = Talk.tagged_with(params[:tag])
+    else
+      @talks = Talk.upcoming.order("date asc", "start_time asc")
+    end
   end
 
   def show
@@ -54,7 +58,7 @@ class TalksController < ApplicationController
 private
 
   def talk_params
-    params.require(:talk).permit(:title, :location, :date, :start_time, :end_time, :spots, :description, :picture, :host_id)
+    params.require(:talk).permit(:title, :location, :date, :start_time, :end_time, :spots, :description, :picture, :host_id, :all_tags)
   end
 
   def set_talk

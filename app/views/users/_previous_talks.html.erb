@@ -32,6 +32,9 @@
             <li> Address: <%= t.location %> </li>
             <li> Description: <%= t.description %> </li>
             <li> Available Spots: <%= t.spots - t.attendees.size %>/<%= t.spots %>  </li>
+            <% if t.all_tags.size > 0 %>
+              <li> Tags: <%= raw tag_links(t.all_tags) %> </li>
+            <% end %>
             <li> <%= time_ago_in_words(t.created_at) %> ago </li>
           </ul>
         </div>
