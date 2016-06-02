@@ -1,15 +1,17 @@
 <h2>Users#show</h2>
 <%= image_tag @user.picture %>
 <h3> <strong> <%= @user.username %> </strong> </h3>
+<h4> <%= @user.occupation %> </h4>
+
 
 <% if @upcoming_hosted.any? || @upcoming_attended.any? %>
-  <h4>Upcoming:</h4>
+  <h5>Upcoming:</h5>
   <%= render 'upcoming_talks', object: @upcoming_hosted %>
   <%= render 'upcoming_talks', object: @upcoming_attended %>
 <% end %>
 
 <% if @previous_hosted.any? || @previous_attended.any? %>
-  <h4>History:</h4>
+  <h5>History:</h5>
 
   <%= render 'previous_talks', object: @previous_hosted %>
   <%= render 'previous_talks', object: @previous_attended %>
