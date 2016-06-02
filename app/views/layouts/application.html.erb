@@ -14,14 +14,15 @@
   <!-- start of navbar -->
   <nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">Commune</a>
+      <a href="/" class="brand-logo center">Commune</a>
       <!-- sidebar for mobile trigger -->
       <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a id="toggle-search" href="#!" class="left"><i class="material-icons">search</i></a>
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
         <li><%= link_to "Talks", talks_path %></li>
         <!-- Dropdown Trigger -->
-        <li><a class="dropdown-button" data-activates="dropdown1"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-button" data-activates="dropdown"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
         <li> <%= link_to "Sign up", new_user_registration_path %></li>
         <li> <%= link_to "Log in", new_user_session_path %></li>
@@ -42,6 +43,14 @@
 
     </div>
     <!-- dropdown content -->
+    <ul id="dropdown" class="dropdown-content">
+      <% if current_user %>
+        <li> <%= link_to "Profile", user_path(current_user) %> </li>
+        <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
+        <li class="divider"></li>
+        <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
+      <% end %>
+    </ul>
     <ul id="dropdown1" class="dropdown-content">
       <% if current_user %>
         <li> <%= link_to "Profile", user_path(current_user) %> </li>
@@ -52,8 +61,19 @@
     </ul>
   </nav>
 
+  <!-- dropdown search bar -->
+  <div id="search" class="row white-text grey darken-3" >
+    <div class="container">
+        <form>
+          <span class="input-field">
+            <input type="text" placeholder="Search ..." name="q"></input>
+          </span>
+        </form>
+    </div>
+  </div>
+
   <!-- start flash messages -->
-  <div>
+  <span>
     <% flash.each do |key, value| %>
       <div class="alert alert-dismissible alert-<%= key %>">
 
@@ -63,7 +83,7 @@
 ​
       </div>
     <% end %>
-  </div>
+  </span>
 
 
 

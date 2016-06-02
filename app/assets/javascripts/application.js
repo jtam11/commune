@@ -27,4 +27,13 @@ $( document ).ready( function(){
   // selector for hamburger button in navbar
   $('.button-collapse').sideNav();
 
+  // selector for search toggle
+  $('a#toggle-search').on('click', function() {
+    var search = $('div#search');
+
+    search.is(":visible") ? search.slideUp() : search.slideDown( function() {
+      search.find('input').focus();
+    });
+  });
+
 });
