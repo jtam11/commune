@@ -15,6 +15,7 @@
   <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">Commune</a>
+      <!-- sidebar for mobile trigger -->
       <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
@@ -26,6 +27,8 @@
         <li> <%= link_to "Log in", new_user_session_path %></li>
         <% end %>
       </ul>
+
+      <!-- sidebar for mobile -->
       <ul class="side-nav" id="mobile">
         <% if current_user %>
         <!-- Dropdown Trigger -->
@@ -36,6 +39,7 @@
         <li> <%= link_to "Log in", new_user_session_path %></li>
         <% end %>
       </ul>
+
     </div>
     <!-- dropdown content -->
     <ul id="dropdown1" class="dropdown-content">
