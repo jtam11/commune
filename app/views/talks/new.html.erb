@@ -1,13 +1,13 @@
 <h2>talk#new</h2>
 <%= form_for @talk  do |f| %>
-  <div class="form-field">
+  <div class="input-field">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="row">
-    <div class="form-field col sm4" id="when">
+    <div class="input-field col sm6" id="when">
       <%= f.label :date %>
-      <%= f.date_field :date%>
+      <%= f.date_field :date, class:"datepicker" %>
     </div>
     <div class="form-field col sm4" id="when">
       <%= f.label "Start" %>
@@ -18,19 +18,19 @@
       <%= f.time_field :end_time %>
     </div>
   </div>
-  <div class="form-field">
+  <div class="input-field">
     <%= f.label "Address" %>
     <%= f.text_field :location %>
   </div>
-  <div class="form-field">
+  <div class="input-field">
     <%= f.label 'Available Spots' %>
     <%= f.number_field :spots, min: 1, max: 25 %>
   </div>
-  <div class="form-field">
+  <div class="input-field">
     <%= f.label :description %>
     <%= f.text_area :description, class:"materialize-textarea" %>
   </div>
-  <div class="form-field">
+  <div class="input-field">
     <%= f.submit "Submit", class:"btn waves-effect waves-light"%>
     <%= link_to "Cancel", talks_path, class:"btn waves-effect blue-grey lighten-1"%>
   </div>
