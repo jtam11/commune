@@ -18,8 +18,13 @@
 //= require_tree .
 
 $( document ).ready( function(){
+  // selector for datepicker in new/edit talk
   $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
+
+  // selector for hamburger button in navbar
+  $('.button-collapse').sideNav();
+
 });
