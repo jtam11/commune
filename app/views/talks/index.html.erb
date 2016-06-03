@@ -1,11 +1,11 @@
-<h2> Talks#Index </h2>
+<div class="talk-index">
 <% if current_user %>
-  <%= link_to "Host a Talk", new_talk_path, class:"btn waves-effect light-blue darken-1" %>
+  <%= link_to "Host a Talk", new_talk_path, class:"btn waves-effect red lighten-1" %>
 <% end %>
 <% @talks.each do |t| %>
   <div class="row">
     <div class="col s12">
-      <div class="card purple darken-3 hoverable">
+      <div class="card amber darken-1 hoverable">
         <div class="card-content white-text">
           <div class="col l4">
             <% if t.host.id != current_user.id %>
@@ -30,7 +30,7 @@
             </ul>
           </div>
           <div class="col l8">
-            <span class="card-title"> <%= link_to t.title, talk_path(t.id) %> </span> <br>
+            <span class="card-title"> <strong> <%= link_to t.title, talk_path(t.id) %> </strong> </span> <br>
             hosted by:
             <div class="chip">
               <%= image_tag t.host.picture %>
@@ -56,3 +56,4 @@
     </div>
   </div>
 <% end %>
+</div>
