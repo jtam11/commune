@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :talks, :foreign_key => :host_id
+  has_many :talks, :foreign_key => :host_id, dependent: :destroy
 
-  has_many :invites, :foreign_key => :attendee_id
-  has_many :attended_talks, :through => :invites
+  has_many :invites, :foreign_key => :attendee_id, dependent: :destroy
+  has_many :attended_talks, :through => :invites, dependent: :destroy
 
 
 
@@ -38,5 +38,5 @@ class User < ActiveRecord::Base
   def previous_attended
     self.attended_talks.past
   end
-  
+
 end

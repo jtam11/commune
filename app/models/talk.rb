@@ -1,11 +1,11 @@
 class Talk < ActiveRecord::Base
   belongs_to :host, :class_name => "User"
 
-  has_many :invites, :foreign_key => "attended_talk_id"
-  has_many :attendees, :through => :invites
+  has_many :invites, :foreign_key => "attended_talk_id", dependent: :destroy
+  has_many :attendees, :through => :invites, dependent: :destroy
 
-  has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings, dependent: :destroy
 
   scope :upcoming, -> { where("date >= ?", Date.today).order('date asc') }
   scope :past, -> { where("date < ?", Date.today).order('date desc') }
