@@ -5,15 +5,15 @@
     <%= f.text_field :title %>
   </div>
   <div class="row">
-    <div class="input-field col sm6" id="when">
+    <div class="input-field col s6" id="when">
       <%= f.label :date %>
       <%= f.date_field :date, class:"datepicker" %>
     </div>
-    <div class="form-field col sm4" id="when">
+    <div class="form-field col s3" id="when">
       <%= f.label "Start" %>
       <%= f.time_field :start_time %>
     </div>
-    <div class="form-field col sm4" id="when">
+    <div class="form-field col s3" id="when">
       <%= f.label "End" %>
       <%= f.time_field :end_time %>
     </div>
@@ -24,7 +24,7 @@
   </div>
   <div class="input-field">
     <%= f.label 'Available Spots' %>
-    <%= f.number_field :spots, min: 1, max: 25 %>
+    <%= f.number_field :spots, min: 1, max: 25, placeholder:"Max 25" %>
   </div>
   <div class="input-field">
     <%= f.label :description %>
