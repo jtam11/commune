@@ -1,40 +1,41 @@
-<h2>talks#edit</h2>
-<%= form_for @talk  do |f| %>
-  <div class="form-field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="row">
-    <div class="form-field col s6" id="when">
-      <%= f.date_field :date, class:'datepicker'%>
+<div class="talk-form">
+  <%= form_for @talk  do |f| %>
+    <div class="form-field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
     </div>
-    <div class="form-field col s3" id="when">
-      <%= f.label "Start" %>
-      <%= f.time_field :start_time %>
+    <div class="row">
+      <div class="form-field col s6" id="when">
+        <%= f.date_field :date, class:'datepicker'%>
+      </div>
+      <div class="form-field col s3" id="when">
+        <%= f.label "Start" %>
+        <%= f.time_field :start_time %>
+      </div>
+      <div class="form-field col s3" id="when">
+        <%= f.label "End" %>
+        <%= f.time_field :end_time %>
+      </div>
     </div>
-    <div class="form-field col s3" id="when">
-      <%= f.label "End" %>
-      <%= f.time_field :end_time %>
+    <div class="form-field">
+      <%= f.label "Address" %>
+      <%= f.text_field :location %>
     </div>
-  </div>
-  <div class="form-field">
-    <%= f.label "Address" %>
-    <%= f.text_field :location %>
-  </div>
-  <div class="form-field">
-    <%= f.label 'Available Spots' %>
-    <%= f.number_field :spots, min: 1, max: 25 %>
-  </div>
-  <div class="form-field">
-    <%= f.label :description %>
-    <%= f.text_area :description, class:"materialize-textarea" %>
-  </div>
-  <div class="input-field">
-    <%= f.label "Tags" %>
-    <%= f.text_field :all_tags, placeholder: "Tags separated with comma" %>
-  </div>
-  <div class="form-field">
-    <%= f.submit "Update", class:"btn waves-effect waves-light"%>
-    <%= link_to "Cancel", talk_path(@talk), class:"btn waves-effect blue-grey lighten-1"%>
-  </div>
-<% end %>
+    <div class="form-field">
+      <%= f.label 'Available Spots' %>
+      <%= f.number_field :spots, min: 1, max: 25 %>
+    </div>
+    <div class="form-field">
+      <%= f.label :description %>
+      <%= f.text_area :description, class:"materialize-textarea" %>
+    </div>
+    <div class="input-field">
+      <%= f.label "Tags" %>
+      <%= f.text_field :all_tags, placeholder: "Tags separated with comma" %>
+    </div>
+    <div class="form-field">
+      <%= f.submit "Update", class:"btn waves-effect waves-light"%>
+      <%= link_to "Cancel", talk_path(@talk), class:"btn waves-effect blue-grey lighten-1"%>
+    </div>
+  <% end %>
+</div>
