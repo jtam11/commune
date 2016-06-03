@@ -8,20 +8,22 @@
       <div class="card amber darken-1 hoverable">
         <div class="card-content white-text">
           <div class="col l4">
-            <% if t.host.id != current_user.id %>
-              <% if current_user.attending?(t) %>
-                <%= form_for(current_user.invites.find_by(attended_talk_id: t.id), method: :delete ) do |f| %>
-                  <%= f.submit "Joined", class: "btn waves-effect blue-grey lighten-1" %>
+            <% if current_user %>
+              <% if t.host.id != current_user.id %>
+                <% if current_user.attending?(t) %>
+                  <%= form_for(current_user.invites.find_by(attended_talk_id: t.id), method: :delete ) do |f| %>
+                    <%= f.submit "Joined", class: "btn waves-effect blue-grey lighten-1" %>
+                  <% end %>
+                <% else %>
+                <% if t.attendees.size < t.spots %>
+                  <%= form_for(current_user.invites.build(attended_talk_id: t.id)) do |f| %>
+                    <div><%= f.hidden_field :attended_talk_id %></div>
+                      <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+                  <% end %>
                 <% end %>
-              <% else %>
-              <% if t.attendees.size < t.spots %>
-                <%= form_for(current_user.invites.build(attended_talk_id: t.id)) do |f| %>
-                  <div><%= f.hidden_field :attended_talk_id %></div>
-                    <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
                 <% end %>
               <% end %>
               <% end %>
-            <% end %>
             <ul>
               <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong>
               <li> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
