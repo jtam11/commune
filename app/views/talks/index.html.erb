@@ -14,10 +14,12 @@
                   <%= f.submit "Joined", class: "btn waves-effect blue-grey lighten-1" %>
                 <% end %>
               <% else %>
+              <% if t.attendees.size < t.spots %>
                 <%= form_for(current_user.invites.build(attended_talk_id: t.id)) do |f| %>
                   <div><%= f.hidden_field :attended_talk_id %></div>
-                  <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+                    <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
                 <% end %>
+              <% end %>
               <% end %>
             <% end %>
             <ul>
