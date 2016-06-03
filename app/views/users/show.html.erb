@@ -18,8 +18,6 @@
 
 <% if @previous_hosted.any? || @previous_attended.any? %>
   <h5>History:</h5>
-
   <%= render 'previous_talks', object: @previous_hosted %>
   <%= render 'previous_talks', object: @previous_attended %>
-
 <% end %>
