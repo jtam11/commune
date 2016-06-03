@@ -17,12 +17,15 @@
  $primary-color: color("teal", "darken-1") !default;
  @import 'materialize';
 
-.previous {
-  opacity: .5;
+ .cards-container {
+   column-break-inside: avoid;
+   .card {
+       display: inline-block;
+   }
 }
 
-.circle {
-  height: 35px;
+.previous {
+  opacity: .5;
 }
 
 #search {
@@ -30,4 +33,15 @@
     margin-bottom: 0px;
     border-top: 1px solid #111;
     border-bottom: 1px solid #111;
+}
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }

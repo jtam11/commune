@@ -11,81 +11,97 @@
   <%= uploadcare_settings %>
 </head>
 <body>
+  <header>
   <!-- start of navbar -->
-  <nav>
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo center">Commune</a>
-      <!-- sidebar for mobile trigger -->
-      <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-      <a id="toggle-search" href="#!" class="left"><i class="material-icons">search</i></a>
-      <ul class="right hide-on-med-and-down">
-        <% if current_user %>
-        <li><%= link_to "Talks", talks_path %></li>
-        <!-- Dropdown Trigger -->
-        <li><a class="dropdown-button" data-activates="dropdown"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
-        <% else %>
-        <li> <%= link_to "Sign up", new_user_registration_path %></li>
-        <li> <%= link_to "Log in", new_user_session_path %></li>
-        <% end %>
-      </ul>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">Commune</a>
+        <ul class="left">
+          <!-- sidebar for mobile trigger -->
+          <li><a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a></li>
+          <li><a id="toggle-search" href="#!" class="left"><i class="material-icons">search</i></a></li>
+        </ul>
 
-      <!-- sidebar for mobile -->
-      <ul class="side-nav" id="mobile">
-        <% if current_user %>
-        <!-- Dropdown Trigger -->
-        <li><a class="dropdown-button" data-activates="dropdown1"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><%= link_to "Talks", talks_path %></li>
-        <% else %>
-        <li> <%= link_to "Sign up", new_user_registration_path %></li>
-        <li> <%= link_to "Log in", new_user_session_path %></li>
-        <% end %>
-      </ul>
+        <ul class="right hide-on-med-and-down">
+          <% if current_user %>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" data-activates="dropdown"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
+          <% else %>
+          <li> <%= link_to "Sign up", new_user_registration_path %></li>
+          <li> <%= link_to "Log in", new_user_session_path %></li>
+          <% end %>
+        </ul>
 
-    </div>
-    <!-- dropdown content -->
-    <ul id="dropdown" class="dropdown-content">
-      <% if current_user %>
-        <li> <%= link_to "Profile", user_path(current_user) %> </li>
-        <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
-        <li class="divider"></li>
-        <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
-      <% end %>
-    </ul>
-    <ul id="dropdown1" class="dropdown-content">
-      <% if current_user %>
-        <li> <%= link_to "Profile", user_path(current_user) %> </li>
-        <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
-        <li class="divider"></li>
-        <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
-      <% end %>
-    </ul>
-  </nav>
+        <!-- sidebar for mobile -->
+        <ul class="side-nav" id="mobile">
+          <% if current_user %>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" data-activates="dropdown1"> <%= current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><%= link_to "Talks", talks_path %></li>
+          <% else %>
+          <li> <%= link_to "Sign up", new_user_registration_path %></li>
+          <li> <%= link_to "Log in", new_user_session_path %></li>
+          <% end %>
+        </ul>
 
-  <!-- dropdown search bar -->
-  <div id="search" class="row white-text grey darken-3" >
-    <div class="container">
-      <%= form_tag(talks_path, :method => "get", id: "search-form") do %>
-      <%= text_field :search, params[:search], placeholder: "Search..." %><%= submit_tag "Submit", :style => "display: none;"%>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- start flash messages -->
-  <span>
-    <% flash.each do |key, value| %>
-      <div class="alert alert-dismissible alert-<%= key %>">
-
-        <script type="text/javascript">
-          Materialize.toast('<%= value %>', 4000)
-        </script>
-​
       </div>
-    <% end %>
-  </div>
+      <!-- dropdown content -->
+      <ul id="dropdown" class="dropdown-content">
+        <% if current_user %>
+          <li> <%= link_to "Profile", user_path(current_user) %> </li>
+          <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
+          <li class="divider"></li>
+          <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
+        <% end %>
+      </ul>
+      <ul id="dropdown1" class="dropdown-content">
+        <% if current_user %>
+          <li> <%= link_to "Profile", user_path(current_user) %> </li>
+          <li> <%= link_to "Edit account", edit_user_registration_path %> </li>
+          <li class="divider"></li>
+          <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <!-- dropdown search bar -->
+    <div id="search" class="row white-text grey darken-3" >
+      <div class="container">
+        <%= form_tag(talks_path, :method => "get", id: "search-form") do %>
+        <%= text_field :search, params[:search], placeholder: "Search..." %><%= submit_tag "Submit", :style => "display: none;"%>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- start flash messages -->
+    <span>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-dismissible alert-<%= key %>">
+
+          <script type="text/javascript">
+            Materialize.toast('<%= value %>', 4000)
+          </script>
+  ​
+        </div>
+      <% end %>
+    </div>
 
 
+    <div class="container col s12">
+      <%= yield %>
+    </div>
+  </main>
 
-<%= yield %>
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+      © 2016 Commune by Justin Tam
+      </div>
+    </div>
+  </footer>
+
 
 </body>
 </html>
