@@ -1,12 +1,12 @@
 <% object.each do |t| %>
   <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12">
 
       <!-- different color if user is host -->
       <% if t.host_id == current_user.id %>
-      <div class="card light-green darken-1">
+      <div class="card light-green darken-1 hoverable">
       <% else %>
-      <div class="card purple darken-3">
+      <div class="card purple darken-3 hoverable">
       <% end %>
 
         <!-- display edit/delete buttons if user is host -->
@@ -18,30 +18,58 @@
         <% end %>
 
         <div class="card-content white-text">
-          <span class="card-title"> <%= link_to t.title, talk_path(t) %> </span>
-
-          <!-- says "hosting" if user is host -->
-          <% if t.host_id == current_user.id %>
-          <p> Hosting </p>
-          <% else %>
-          <br>
-          hosted by:
-          <div class="chip">
-            <%= image_tag t.host.picture %>
-            <%= link_to t.host.username, user_path(t.host.id)  %>
+          <div class="col l4">
+            <!-- button to join/leave a talk -->
+            <% if t.host.id != current_user.id %> <!-- user can't join their own talk -->
+              <% if current_user.attending?(t) %>
+                <%= form_for(current_user.invites.find_by(attended_talk_id: t.id), method: :delete ) do |f| %>
+                  <%= f.submit "Joined", class: "btn waves-effect blue-grey lighten-1" %>
+                <% end %>
+              <% else %>
+              <!-- checks if talk is full -->
+              <% if t.attendees.size < t.spots %>
+                <%= form_for(current_user.invites.build(attended_talk_id: t.id)) do |f| %>
+                  <div><%= f.hidden_field :attended_talk_id %></div>
+                    <%= f.submit "+Join", class: "btn waves-effect waves-light" %>
+                <% end %>
+              <% end %>
+              <% end %>
+            <% end %>
+            <ul>
+              <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong>
+              <li> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
+              <li> Address: <%= t.location %> </li>
+              <li> Available Spots: <%= t.spots - t.attendees.size %>/<%= t.spots %>  </li>
+            </ul>
+          </div>
+          <div class="col l8">
+            <span class="card-title"> <%= link_to t.title, talk_path(t.id) %> </span> <br>
+            <!-- says "hosting" if user is host -->
+            <% if t.host_id == current_user.id %>
+            <p> Hosting </p>
+            <% else %>
+            <br>
+            hosted by:
+            <div class="chip">
+              <%= image_tag t.host.picture %>
+              <%= link_to t.host.username, user_path(t.host.id)  %>
+            </div>
+            <% end %>
+            <br>
+            <br>
+            <div class="truncate">
+              Description: <%= t.description %>
+            </div>
+          </div>
+          <% if t.all_tags.size > 0 %>
+          <hr>
+          <div class="tag-list">
+            Tags: <%= raw tag_links(t.all_tags) %>
           </div>
           <% end %>
-
-          <ul>
-            <li> Date: <strong><%= t.date.strftime("%b %d, %Y") %></strong> Time: <%= t.start_time.strftime('%I:%M %p') %> - <%= t.end_time.strftime('%I:%M %p') %> </li>
-            <li> Address: <%= t.location %> </li>
-            <li> Description: <%= t.description %> </li>
-            <li> Available Spots: <%= t.spots - t.attendees.size %>/<%= t.spots %>  </li>
-            <% if t.all_tags.size > 0 %>
-              <li> Tags: <%= raw tag_links(t.all_tags) %> </li>
-            <% end %>
-            <li> <%= time_ago_in_words(t.created_at) %> ago </li>
-          </ul>
+          <div class="right">
+            <small><%= time_ago_in_words(t.created_at) %> ago</small>
+          </div>
         </div>
       </div>
     </div>
