@@ -4,9 +4,9 @@
 
       <!-- different color if user is host -->
       <% if t.host_id == current_user.id %>
-      <div class="card light-green darken-1 hoverable">
+      <div class="card red lighten-1 hoverable">
       <% else %>
-      <div class="card purple darken-3 hoverable">
+      <div class="card amber darken-1 hoverable">
       <% end %>
 
         <!-- display edit/delete buttons if user is host -->
@@ -43,7 +43,7 @@
             </ul>
           </div>
           <div class="col l8">
-            <span class="card-title"> <%= link_to t.title, talk_path(t.id) %> </span> <br>
+            <span class="card-title"> <strong> <%= link_to t.title, talk_path(t.id) %> </strong> </span> <br>
             <!-- says "hosting" if user is host -->
             <% if t.host_id == current_user.id %>
             <p> Hosting </p>
