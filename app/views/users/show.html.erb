@@ -1,8 +1,14 @@
-<h2>Users#show</h2>
-<%= image_tag @user.picture %>
-<h3> <strong> <%= @user.username %> </strong> </h3>
-<h4> <%= @user.occupation %> </h4>
 
+<div class="col s12 center profile">
+    <%= image_tag @user.picture, class:"circle" %>
+    <h3> <strong> <%= @user.username %> </strong> </h3>
+    <h4> <%= @user.occupation %> </h4>
+    <% if @user.talks.size == 1 %>
+      <p> 1 talk hosted </p>
+    <% else %>
+      <p> <%= @user.talks.size %> talks hosted </p>
+    <% end %>
+  </div>
 
 <% if @upcoming_hosted.any? || @upcoming_attended.any? %>
   <h5>Upcoming:</h5>
